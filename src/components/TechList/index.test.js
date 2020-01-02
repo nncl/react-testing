@@ -4,13 +4,9 @@ import TechList from "~/components/TechList/index";
 
 describe('TechListComponent', () => {
     it('should be able to add new tech', () => {
-        const { getByText, getByTestId, debug } = render(<TechList />);
-
-        debug();
+        const { getByText, getByTestId } = render(<TechList />);
 
         fireEvent.click(getByText('Add'));
-
-        debug();
 
         expect(getByTestId('tech-list')).toContainElement(getByText('Node.js'));
     });
