@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function TechList() {
     const [techs, setTechs] = useState([]);
@@ -8,6 +8,18 @@ export default function TechList() {
         setTechs([...techs, newTech]);
         setNewTech('');
     }
+
+    useEffect(() => {
+        const techs = localStorage.getItem('techs');
+
+        if (techs) {
+            setTechs(JSON.parse(techs));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('techs', JSON.stringify(techs));
+    }, [techs]);
 
     return (
         <form data-testid="tech-form" onSubmit={handleAddTech}>
