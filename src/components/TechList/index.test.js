@@ -25,7 +25,7 @@ describe('TechListComponent', () => {
         expect(getByLabelText('Tech')).toHaveValue('');
     });
 
-    it('should store tech on storage',  () => {
+    it('should store tech on storage', () => {
         // Render component
         let { getByTestId, getByLabelText, getByText } = render(<TechList />);
         const value = 'Node.js';
@@ -40,6 +40,9 @@ describe('TechListComponent', () => {
         cleanup();
 
         ({ getByTestId, getByText } = render(<TechList />));
+
+        // Verify is localstorage API setItem method works
+        expect(localStorage.setItem).toHaveBeenCalledWith('techs', JSON.stringify([value]));
 
         // Verify if item still exists on the list
         expect(getByTestId('tech-list')).toContainElement(getByText(value));
