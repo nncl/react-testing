@@ -41,7 +41,7 @@ describe('TechListComponent', () => {
 
         ({ getByTestId, getByText } = render(<TechList />));
 
-        // Verify is localstorage API setItem method works
+        // Verify if localstorage API setItem method works
         expect(localStorage.setItem).toHaveBeenCalledWith('techs', JSON.stringify([value]));
 
         // Verify if item still exists on the list
