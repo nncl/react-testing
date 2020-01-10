@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function TechList() {
-    const [techs, setTechs] = useState([]);
     const [newTech, setNewTech] = useState('');
+    const techs = useSelector(state => state.techs);
+    const dispatch = useDispatch();
 
     function handleAddTech() {
-        setTechs([...techs, newTech]);
+        dispatch({ type: 'ADD_TECH', payload: { tech: newTech } });
         setNewTech('');
     }
-
-    useEffect(() => {
-        const techs = localStorage.getItem('techs');
-
-        if (techs) {
-            setTechs(JSON.parse(techs));
-        }
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem('techs', JSON.stringify(techs));
-    }, [techs]);
 
     return (
         <form data-testid="tech-form" onSubmit={handleAddTech}>
